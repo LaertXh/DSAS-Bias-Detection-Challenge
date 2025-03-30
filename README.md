@@ -7,6 +7,8 @@ The dataset is fully synthetic and build specifically for this challenge. The go
 ## Scenario 
 The company Kendrellis Enterprises is suspecting that it's hiering practices may be vonurable to potential biases. They have hiered a outiser consultant (thas's you) to investigate. Analyze their application history dataset to uncover any biases such as age, gender, race or any other form of unequal treatment. 
 
+The company has the following hiring structure. Users apply which creates our applications table. Each appliccations goes through a AI acreening phase, most get rejected. Finally the ones that passed go enter the recruitment interview screening and again most get rejected. The ones that pass will then go to the techniacal interview and finally the selected applicants will go through the management interview which makes a final decision. 
+
 ## Objectives
 1. Identify biases in any stage of the hiring process:
     - AI Screening
