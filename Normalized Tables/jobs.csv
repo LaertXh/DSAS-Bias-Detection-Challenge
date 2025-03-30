@@ -1,0 +1,21 @@
+job_id,job_title,department
+1,Data Analyst,Engineering
+2,Backend Engineer,Engineering
+3,Frontend Engineer,Engineering
+4,DevOps Engineer,Engineering
+5,Machine Learning Engineer,Engineering
+6,HR Generalist,HR
+7,Talent Acquisition Specialist,HR
+8,HR Business Partner,HR
+9,L&D Manager,HR
+10,Compensation Analyst,HR
+11,Sales Representative,Sales
+12,Account Executive,Sales
+13,Business Development Associate,Sales
+14,Customer Success Manager,Sales
+15,Sales Operations Analyst,Sales
+16,Digital Marketing Specialist,Marketing
+17,SEO Strategist,Marketing
+18,Content Marketing Manager,Marketing
+19,Product Marketing Manager,Marketing
+20,Social Media Coordinator,Marketing
