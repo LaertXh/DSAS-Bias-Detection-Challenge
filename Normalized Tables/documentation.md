@@ -91,9 +91,9 @@ Every time a candidate applies for a job, we have a unique row here. This is the
 - **File**: `ai_screening.csv`
 - **Columns**:  
   - `application_id` (FK to `applications.application_id`)  
-  - `ai_screening` (value is `1` for pass, if they failed this stage they are not here)
+  - `ai_screening` (value is `1` for pass, `0` for fail)
 
-This table **only** lists applications that passed AI screening. If an application does not appear here, it did not pass. You can left-join this table to **`applications`** to see who was filtered out by the AI stage.
+As en example, you can join this table to **`applications`** and then join the result to **`candidates`**. Then you can figure out potential bias.
 
 ---
 
@@ -102,9 +102,9 @@ This table **only** lists applications that passed AI screening. If an applicati
 - **Columns**:  
   - `application_id` (FK to `applications.application_id`)  
   - `recruiter_id` (FK to `recruiters.recruiter_id`)  
-  - `rec_screening` (value is `1` for a pass, the ones that failed are not here)
+  - `rec_screening` (value is `1` for a pass, `0` for a fail)
 
-Contains records of applications that went through the recruiter screening. The `recruiter_id` helps link which recruiter handled the screening.
+Contains records of applications that went through the recruiter screening. The `recruiter_id` helps link which recruiter handled the screening. Missing applications means that they never passed the ai screening so they never got to this stage.
 
 ---
 
@@ -113,9 +113,9 @@ Contains records of applications that went through the recruiter screening. The 
 - **Columns**:  
   - `application_id` (FK to `applications.application_id`)  
   - `tech_interview_score` (numeric score from the technical interview)  
-  - `tech_screening` (indicator if passed or not—may be `0` or `1` or another code)
+  - `tech_screening` (value is `1` for a pass, `0` for a fail, `1` for a pass)
 
-This table tracks the technical interview. Even failed applications might have a score here, which helps in analyzing where each candidate stands in terms of technical proficiency before being disqualified or approved.
+This table tracks the technical interview. Notice that there is a score for each interview depending on the performance of the candidate. Missing applications means that they never passed the recruiter screening so they never got to this stage.
 
 ---
 
@@ -123,9 +123,9 @@ This table tracks the technical interview. Even failed applications might have a
 - **File**: `management_screening.csv`
 - **Columns**:  
   - `application_id` (FK to `applications.application_id`)  
-  - `management_screening` (value is `1` if approved by management)
+  - `management_screening` (value is `1` for a pass, `0` for a fail)
 
-Represents final decision by management. If an application ID is present, it means the candidate reached the management stage and was approved.
+Represents final decision by management.
 
 ---
 
@@ -139,18 +139,14 @@ Below is a basic relationship schema:
 - **`rec_screening`** links to **`applications`** on `application_id`; also links to **`recruiters`** on `recruiter_id`
 - **`tech_screening`** links to **`applications`** on `application_id`
 - **`management_screening`** links to **`applications`** on `application_id`
+- **`applications`** links to **`candidates`** on `candidate_id`
+- **`applications`** links to **`jobs`** on `job_id` --> there is no bias related to jobs, its just here for aesthetic 
 
 
 ---
 
 ## Usage Notes
-1. **Missing Rows Indicate Failure**  
-   - If an `application_id` is absent in `ai_screening` or `rec_screening`, that means the candidate did not pass that stage.
-2. **Scoring & Outcomes**  
-   - The `tech_screening` table has a numeric `tech_interview_score`. Not all entries that appear might have passed, so both pass and fail exist.
-3. **Final Approvals**  
-   - Only a small subset make it to the `management_screening` table. If they appear here, thy have passed.
-4. **Aliases for Clarity**  
+1. **Aliases for Clarity**  
    - `recruiters` and `candidates` share columns like `gender`, `ethnicity`, etc. Always alias them in your queries (`cand.gender`, `rec.gender`) to differentiate.
-5. **Data is Fictional**  
+2. **Data is Fictional**  
    - The records are synthetic, intended to illustrate a hiring pipeline. Do not treat this data as real.

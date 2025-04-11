@@ -22,4 +22,4 @@ The company has the following hiring structure. Users apply which creates our ap
 3. The final open ended question. There is 0 intended bias in the managment final decisions, however do you think that its fully free of bias considering what you found on the previous steps of the hiring process?
 
 The goal of this challange is for you to showcase some of your skills that you have acquired in understanding and working with data. 
-You can choose to work with the normalized tables and join thema s you please. Ther is a fully joined dataset that you can use if you choose to work with the full dataset. There are seperate documentation files for explaining the datasets inside the folders. Have fun. 
+You can choose to work with the normalized tables and join them as you please. There is a fully joined dataset that you can use if you choose to work with if you find it easier. There is a seperate documentation file for explaining the dataset inside the "Normalized Tables" folder. Have fun. 
